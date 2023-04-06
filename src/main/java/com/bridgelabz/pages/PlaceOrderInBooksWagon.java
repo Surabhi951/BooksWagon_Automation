@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 
 public class PlaceOrderInBooksWagon {
 
@@ -20,6 +23,9 @@ public class PlaceOrderInBooksWagon {
 
     @FindBy(xpath = "//*[@id=\"ctl00_phBody_ProductDetail_divAddtoCart\"]/a/input")
     WebElement buyNowBtn;
+
+    @FindBy(id = "BookCart_lvCart_ctrl0_txtQty")
+    WebElement quantity;
 
     @FindBy(id = "ctl00_cpBody_txtNewRecipientName")
     WebElement recipientName;
@@ -50,12 +56,23 @@ public class PlaceOrderInBooksWagon {
         PageFactory.initElements(driver,this);
     }
 
-    public void orderBook() throws InterruptedException {
+    public void orderBook() throws InterruptedException, AWTException {
         bestSeller.click();
         selectBook.click();
         buyNowBtn.click();
         driver.switchTo().frame(0);
         Thread.sleep(200);
+        quantity.click();
+        Thread.sleep(500);
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_A);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_A);
+        robot.keyPress(KeyEvent.VK_BACK_SPACE);
+        Thread.sleep(500);
+        quantity.sendKeys("2");
+        Thread.sleep(500);
         WebElement placeOrderBtn = driver.findElement(By.name("BookCart$lvCart$imgPayment"));
         placeOrderBtn.click();
         Thread.sleep(2000);

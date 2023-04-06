@@ -44,3 +44,4 @@ public class BooksWagonLoginPage extends ReadPropertyFile {
         Assert.assertEquals("Online BookStore India, Buy Books Online, Buy Book Online India - Bookswagon.com",title);
     }
 }
+
