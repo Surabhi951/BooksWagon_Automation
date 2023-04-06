@@ -104,4 +104,3 @@ public class BooksWagonTest extends BaseClass {
         closeBrowser();
     }
 }
-
